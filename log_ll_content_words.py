@@ -62,45 +62,23 @@ def read(f_name,corpus_name,ngrams,max_lines=0):
         line=unicode(line.strip(),"utf-8")
         if not line:
             continue
-#        if line.statswith("#"):
- #           continue
-#        for word in search_words:
- #           if word in line:
-  #              print("kukkuu", line)
-   #             break
         if not line.startswith("#"):
-           # print("UUSI")
-#            print(line).encode("utf-8")
             line2=line.split("\t")
-#            if len(line2) < 2: print("2", line2)
-#            print(line2[0]).encode("utf-8")
             try: 
                 feat=line2[1]
                 feat=feat.strip()
             except: continue
             pos=line2[2]
             pos=pos.strip()
-          #  print("FEAT")
-          #  print(feat).encode("utf-8")
             if feat in search_words:
-           #     print("kukkuu", feat)
                 continue
             if pos not in pos_to_keep:
- #               print("k", pos)
                 continue
-#            line2=line[0]
- #           print(line2).encode("utf-8")
             if feat not in ngrams:
-#            if not line.startswith("#"):
-            #    print("line", feat)
                 ng=NGram(feat)
-  #              print("ng", ng)
                 ngrams[feat]=ng
-   #             print("ngrams", ngrams)
             else:
-             #   print("2", feat)
                 ng=ngrams[feat]
-        #Now ng is an NGram() object
             ng.count(corpus_name) #counts 1 by the default
             if max_lines>0 and line_idx>max_lines:
                 break
@@ -115,7 +93,7 @@ def highest_ll_ngrams(corpus_name,ngrams,corpus_counts,total):
 
 if __name__=="__main__":
     ngrams={} #key: ngram_string, value: NGram()
-    corpora=[("Suomi24","koyha-kommentit-2014.txt.gz"),("Reference corpus","verrokki.txt.gz")]#,("math","triarcs_wikidisc_math.gz")]
+    corpora=[("Suomi24","koyha-kommentit-2014.txt.gz"),("Reference corpus","reference.txt.gz")]
     for corpus_name,corpus_file in corpora:
         print >> sys.stderr, "Reading", corpus_name,
         read(corpus_file,corpus_name,ngrams)
@@ -131,14 +109,10 @@ if __name__=="__main__":
         for ng,ll in ngrams_and_ll:
             Prop =  ng.counts.get(corpus_name,0) / sum(ng.counts.itervalues())
             Value = None
-#            print(Prop)
             if float(Prop) > 0.1:
                 Value = "Pos"
             else:
                 Value = "Neg"
-#            if int(Prop) < 0.1:
- #               Value = "Neg"
-#            print(Value)
             print (u"ll=%.3f   FREQ=%d/%d   %s   %s"%(ll,ng.counts.get(corpus_name,0),sum(ng.counts.itervalues()),Value, ng.ng)).encode("utf-8")
 
 

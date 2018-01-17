@@ -67,21 +67,12 @@ def read(f_name,corpus_name,ngrams,max_lines=0):
                 feat=feat.strip()
             except: continue
             if feat in search_words:
-           #     print("kukkuu", feat)
                 continue
-#            line2=line[0]
- #           print(line2).encode("utf-8")
             if feat not in ngrams:
-#            if not line.startswith("#"):
-            #    print("line", feat)
                 ng=NGram(feat)
-  #              print("ng", ng)
                 ngrams[feat]=ng
-   #             print("ngrams", ngrams)
             else:
-             #   print("2", feat)
                 ng=ngrams[feat]
-        #Now ng is an NGram() object
             ng.count(corpus_name) #counts 1 by the default
             if max_lines>0 and line_idx>max_lines:
                 break
@@ -96,9 +87,9 @@ def highest_ll_ngrams(corpus_name,ngrams,corpus_counts,total):
 
 if __name__=="__main__":
     ngrams={} #key: ngram_string, value: NGram()
-    corpora=[("Suomi24","koyha-kommentit-2014.txt.gz"),("Reference corpus","verrokki.txt.gz")]#,("math","triarcs_wikidisc_math.gz")]
+    corpora=[("Suomi24 köyhät","koyha-kommentit-2014.txt.gz"),("Reference corpus","reference.txt.gz")]
     for corpus_name,corpus_file in corpora:
-        print >> sys.stderr, "Reading", corpus_name,
+        print >> sys.stderr, "Reading", corpus_name.encode("utf-8"),
         read(corpus_file,corpus_name,ngrams)
         print >> sys.stderr, " ...done"
     
