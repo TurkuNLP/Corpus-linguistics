@@ -33,6 +33,6 @@ def read_comment(corpus_l, file_n):
           
 if __name__=="__main__":
 
-  corpora=["koyha-kommentit-2014.txt.gz", "no_koyha.txt.gz"]
+  corpora=["koyha-kommentit-2014.txt.gz", "no-koyha.txt.gz"]
   for label, file in enumerate(corpora):
     read_comment(label, file)
