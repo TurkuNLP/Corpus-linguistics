@@ -84,11 +84,11 @@ for c in [0.5]: # here you can test with different c values
     print
     
     sorted_by_weight=sorted(zip(classifier.coef_[0], f_names))
-    for f_weight, f_name in sorted_by_weight[:10]:
+    for f_weight, f_name in sorted_by_weight[:50]:
             print >> out8, f_name, f_weight
     print
-    print >> out8, "CLASS 1: Positiiviset avainlemmat:"
-    print
-    for f_weight, f_name in sorted_by_weight[-10:]:
-            print >> out8, f_name, f_weight
-    print
+  #  print >> out8, "CLASS 1: Positiiviset avainlemmat:"
+ #   print
+#    for f_weight, f_name in sorted_by_weight[-10:]:
+#            print >> out8, f_name, f_weight
+#    print

@@ -7,7 +7,7 @@ import gzip
 
 search_words = [u'köyhä', u'rutiköyhä', u"ruti#köyhä", u"rahaton", u"persaukinen", u"pers#aukinen", u"vähävarainen", u"vähä#varainen", u"perseaukinen", u"perse#aukinen", u"tyhjätasku", u"tyhjä#tasku", u"pienituloinen", u"pieni#tuloinen",  u"sossupummi", u"sossu#pummi", u"saita", u"sosiaalipummi", u"sosiaali#pummi", u"varaton", u"eläkeläinen", u"pienipalkkainen", u"pieni#palkkainen"]
 
-pos_not_to_keep = [u"PUNCT", u"SCONJ", u"CONJ", u"AUX", u"PRON"] 
+pos_not_to_keep = [u"PUNCT", u"SCONJ", u"CONJ", u"AUX", u"PRON"]  # näitä voi vaihdella, jos haluaa
 
 out8 = codecs.getwriter(u"utf-8")(sys.stdout)
 
@@ -28,7 +28,7 @@ def read_comment(corpus_l, file_n):
           try:
               if  line[1].strip() not in search_words:
                   if line[2].strip() not in pos_not_to_keep:
-                      comment.append(line[1].strip())
+                      comment.append(line[1].strip()) # tähän voi 1:sen tilalle laittaa 0:n, jos haluaa koittaa, mitä lemman vaihtaminen juoksevaksi sanaksi vaikuttaa
           except: continue 
           
 if __name__=="__main__":
